@@ -19,4 +19,11 @@ public class TableRepository {
     public static List<Table> tables() {
         return Collections.unmodifiableList(tables);
     }
+
+    public static Table findMenuByNumber(int number) {
+        return tables.stream()
+                .filter(menu -> menu.getNumber() == number)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("등록되지 않은 테이블입니다."));
+    }
 }
