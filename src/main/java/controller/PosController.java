@@ -25,12 +25,23 @@ public class PosController {
 
     public static void pay() {
         OutputView.printTables(tables);
-        Table table = repeat(TableRepository::findMenuByNumber, InputView::inputTableNumber);
-        Pay pay = new Pay(table);
+        // TODO 주문 내역이 없는 테이블은 계산 불가 처리
+        Pay pay = repeatPayOnTable();
         OutputView.printOrderList(pay);
-        OutputView.printPay(table);
+        OutputView.printPay(pay);
         int payMethod = repeat(Integer::valueOf, InputView::inputPayMethod);
         OutputView.printFinalCost(pay, payMethod);
+        OrderRepository.delete(pay);
+    }
+
+    private static Pay repeatPayOnTable() {
+        try {
+            Table table = repeat(TableRepository::findMenuByNumber, InputView::inputTableNumber);
+            return new Pay(table);
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e.getMessage());
+            return repeatPayOnTable();
+        }
     }
 
     private static void repeatMenuAmount(Table table) {

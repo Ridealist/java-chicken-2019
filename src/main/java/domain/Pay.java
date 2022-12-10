@@ -13,9 +13,17 @@ public class Pay {
     private final Table table;
     private final List<Order> orders;
 
+    // TODO 주문 내역이 없는 테이블은 계산 불가
     public Pay(Table table) throws IllegalArgumentException {
+        validateOrderOnTable(table);
         this.table = table;
         this.orders = OrderRepository.getOrdersByTable(table);
+    }
+
+    private void validateOrderOnTable(Table table) {
+        if (!OrderRepository.hasOrdersOnTable(table)) {
+            throw new IllegalArgumentException("선택된 테이블은 주문 내역이 없어 결제할 수 없습니다.");
+        }
     }
 
     public int getDiscountPrice(int number) {
@@ -61,5 +69,9 @@ public class Pay {
 
     private double calculatePayDiscount(int cost, PayMethod payMethod) {
         return payMethod.getDiscountPrice(payMethod, cost);
+    }
+
+    public Table getTable() {
+        return table;
     }
 }
