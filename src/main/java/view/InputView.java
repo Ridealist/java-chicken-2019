@@ -5,7 +5,6 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
 
-    // TODO enum 등을 활용해 효율적 관리 방안
     public static int inputFunctionNumber() throws IllegalArgumentException {
         System.out.println("## 원하는 기능을 선택하세요.");
         String input = Console.readLine();
