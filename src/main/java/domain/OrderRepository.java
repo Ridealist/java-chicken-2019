@@ -9,28 +9,36 @@ public class OrderRepository {
     private static final List<Order> orders = new ArrayList<>();
 
     public static void save(Table table, Menu menu, int menuAmount) throws IllegalArgumentException {
-        validateMenuCount(table, menuAmount);
+        validateMenuCount(table, menu, menuAmount);
         orders.add(new Order(table, menu, menuAmount));
     }
 
-    private static void validateMenuCount(Table table, int menuAmount) {
-        if (countMenuAmountByTable(table) + menuAmount > MENU_ORDER_COUNT_UPPER_BOUND) {
+    public static void delete(Pay pay) {
+        List<Order> ordersOnTable = orders.stream()
+                .filter(order -> order.getTable().equals(pay.getTable()))
+                .collect(Collectors.toUnmodifiableList());
+        orders.removeAll(ordersOnTable);
+    }
+
+    // TODO 메뉴 당 개수가 아닌, 전체 개수가 넘으면 오류 발생하는 에러 해결!
+    private static void validateMenuCount(Table table, Menu menu, int menuAmount) {
+        if (countMenuAmountByTable(table, menu) + menuAmount > MENU_ORDER_COUNT_UPPER_BOUND) {
             throw new IllegalArgumentException("테이블 당 한 메뉴를 최대 99개까지만 주문할 수 있습니다.");
         }
     }
 
-    private static int countMenuAmountByTable(Table table) {
+    private static int countMenuAmountByTable(Table table, Menu menu) {
         return orders.stream()
                 .filter(order -> order.getTable().equals(table))
+                .filter(order -> order.getMenu().equals(menu))
                 .map(Order::getMenuAmount)
                 .mapToInt(menuAmount -> menuAmount)
                 .sum();
     }
 
-    public static List<Order> findOrdersByTable(Table table) {
+    public static boolean hasOrdersOnTable(Table table) {
         return orders.stream()
-                .filter(order -> order.getTable().equals(table))
-                .collect(Collectors.toList());
+                .anyMatch(order -> order.getTable().equals(table));
     }
 
     // TODO query를 효율적으로 보내도록 필드별 파라미터를 처음부터 설정
