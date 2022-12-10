@@ -76,20 +76,21 @@ public class OutputView {
         System.out.println();
     }
 
-    // TODO 주문 내역 잘못 나오는 것 수정
+    // TODO 금액에 수량을 곱한 금액이 나오도록 수정
     public static void printOrderList(final Pay pay) {
         System.out.println("## 주문 내역");
         System.out.println("메뉴 수량 금액");
         Map<Menu, Integer> menuCounts = pay.aggregateMenus();
         for (Menu menu : menuCounts.keySet()) {
-            System.out.printf(ORDER_LIST_FORMAT, menu.getName(), menuCounts.get(menu), menu.getPrice());
+            System.out.printf(ORDER_LIST_FORMAT, menu.getName(), menuCounts.get(menu),
+                    menu.getPrice() * menuCounts.get(menu));
             System.out.println();
         }
         System.out.println();
     }
 
-    public static void printPay(final Table table) {
-        System.out.printf(PAY_MESSAGE, table.getNumber());
+    public static void printPay(final Pay pay) {
+        System.out.printf(PAY_MESSAGE, pay.getTable().getNumber());
         System.out.println();
     }
 
