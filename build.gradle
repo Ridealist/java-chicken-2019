@@ -1,20 +1,22 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
-
-version = '1.0.0'
-sourceCompatibility = 1.8
+plugins {
+    id 'java'
+}
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    testCompile('org.junit.jupiter:junit-jupiter:5.5.2')
-    testCompile('org.assertj:assertj-core:3.14.0')
+    implementation 'com.github.woowacourse-projects:mission-utils:1.0.0'
 }
 
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(11)
     }
+}
+
+test {
+    useJUnitPlatform()
 }
