@@ -1,5 +1,6 @@
 package Validator;
 
+import domain.MenuRepository;
 import domain.TableRepository;
 import java.util.Arrays;
 import java.util.List;
@@ -25,8 +26,14 @@ public class InputValidator {
     }
 
     public static void validateTableNumber(int number) {
-        if (TableRepository.getTableNumbers().contains(number)) {
+        if (!TableRepository.getTableNumbers().contains(number)) {
             throw new IllegalArgumentException("올바른 테이블 번호를 입력해주세요.");
+        }
+    }
+
+    public static void validateMenuNumber(int number) {
+        if (!MenuRepository.getMenuNumbers().contains(number)) {
+            throw new IllegalArgumentException("올바른 메뉴를 선택해주세요.");
         }
     }
 }

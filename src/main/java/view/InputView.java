@@ -22,17 +22,19 @@ public class InputView {
         return number;
     }
 
-    public static int inputMenuChoice() {
+    public static int inputMenuChoice() throws IllegalArgumentException {
         System.out.println();
         System.out.println("## 등록할 메뉴를 선택하세요.");
         String input = Console.readLine();
-        return Integer.parseInt(input);
+        int number = InputValidator.validateNumber(input);
+        InputValidator.validateMenuNumber(number);
+        return number;
     }
 
     public static int inputMenuAmount() {
         System.out.println();
         System.out.println("## 메뉴의 수량을 입력하세요.");
         String input = Console.readLine();
-        return Integer.parseInt(input);
+        return InputValidator.validateNumber(input);
     }
 }
