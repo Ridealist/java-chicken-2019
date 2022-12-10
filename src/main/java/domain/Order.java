@@ -3,12 +3,12 @@ package domain;
 public class Order {
     private final Table table;
     private final Menu menu;
-    private final int menuCount;
+    private final int menuAmount;
 
-    public Order(Table table, Menu menu, int menuCount) {
+    public Order(Table table, Menu menu, int menuAmount) {
         this.table = table;
         this.menu = menu;
-        this.menuCount = menuCount;
+        this.menuAmount = menuAmount;
     }
 
     @Override
@@ -24,7 +24,7 @@ public class Order {
         return menu;
     }
 
-    public int getMenuCount() {
-        return menuCount;
+    public int getMenuAmount() {
+        return menuAmount;
     }
 }
