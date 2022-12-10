@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TableRepository {
     private static final List<Table> tables = new ArrayList<>();
@@ -18,6 +19,12 @@ public class TableRepository {
 
     public static List<Table> tables() {
         return Collections.unmodifiableList(tables);
+    }
+
+    public static List<Integer> getTableNumbers() {
+        return tables.stream()
+                .map(Table::getNumber)
+                .collect(Collectors.toList());
     }
 
     public static Table findMenuByNumber(int number) {
