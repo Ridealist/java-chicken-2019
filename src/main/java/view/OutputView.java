@@ -6,14 +6,17 @@ import domain.Order;
 import domain.Pay;
 import domain.Table;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OutputView {
     public static final String ERROR = "[ERROR]";
     private static final String TOP_LINE = "┌ ─ ┐";
     private static final String TABLE_FORMAT = "| %s |";
     private static final String BOTTOM_LINE = "└ ─ ┘";
-    private static final String PAY_MESSAGE = "%s번 테이블의 결제를 진행합니다.";
+    private static final String PAY_MESSAGE = "## %s번 테이블의 결제를 진행합니다.";
+    private static final String ORDER_LIST_FORMAT = "%s %s %s";
 
     public static void printError(String message) {
         System.out.println(ERROR + message);
@@ -57,11 +60,13 @@ public class OutputView {
     }
 
     // TODO 주문 내역 잘못 나오는 것 수정
-    public static void printOrderList(final List<Order> orders) {
+    public static void printOrderList(final Pay pay) {
         System.out.println("## 주문 내역");
         System.out.println("메뉴 수량 금액");
-        for (Order order : orders) {
-            System.out.println(order.getMenu().toString());
+        Map<Menu, Integer> menuCounts = pay.aggregateMenus();
+        for (Menu menu : menuCounts.keySet()) {
+            System.out.printf(ORDER_LIST_FORMAT, menu.getName(), menuCounts.get(menu), menu.getPrice());
+            System.out.println();
         }
     }
 
@@ -70,9 +75,9 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printFinalCost(final Pay pay) {
+    public static void printFinalCost(final Pay pay, int payMethod) {
         System.out.println("## 최종 결제할 금액");
-        System.out.println(pay.getDiscountPrice() + "원");
+        System.out.println(pay.getDiscountPrice(payMethod) + "원");
         System.out.println();
     }
 }

@@ -27,11 +27,11 @@ public class PosController {
     public static void pay() {
         OutputView.printTables(tables);
         Table table = repeat(TableRepository::findMenuByNumber, InputView::inputTableNumber);
-        List<Order> orders = OrderRepository.findOrdersByTable(table);
-        OutputView.printOrderList(orders);
+        Pay pay = new Pay(table);
+        OutputView.printOrderList(pay);
         OutputView.printPay(table);
         int payMethod = repeat(Integer::valueOf, InputView::inputPayMethod);
-        OutputView.printFinalCost(new Pay(table, payMethod));
+        OutputView.printFinalCost(pay, payMethod);
     }
 
     private static void repeatMenuAmount(Table table) {
