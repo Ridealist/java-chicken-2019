@@ -20,7 +20,7 @@ public class InputView {
 
     public static int inputTableNumber() throws IllegalArgumentException {
         System.out.println();
-        System.out.println("## 주문할 테이블을 선택하세요.");
+        System.out.println("## 테이블을 선택하세요.");
         String input = Console.readLine();
         int number = InputValidator.validateNumber(input);
         // TODO DB 단에서 레코드가 있는지 확인하는 것을 InputView에서 진행해도 되는가...?

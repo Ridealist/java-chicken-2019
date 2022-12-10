@@ -40,7 +40,7 @@ public class InputValidator {
 
     public static void validatePayMethod(String input) {
         if (!VALID_PAY_METHOD.contains(input.trim())) {
-            throw new IllegalArgumentException("올바른 메뉴를 선택해주세요.");
+            throw new IllegalArgumentException("올바른 결제 방법을 선택해주세요.");
         }
     }
 }
