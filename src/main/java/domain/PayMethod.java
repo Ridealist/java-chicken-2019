@@ -3,8 +3,8 @@ package domain;
 import java.util.Arrays;
 
 public enum PayMethod {
-    CREDIT_CARD(1, 0.95),
-    CASH(2, 1);
+    CREDIT_CARD(1, 1),
+    CASH(2, 0.95);
 
     private int choice;
     private double discountPercentage;
