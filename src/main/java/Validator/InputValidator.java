@@ -7,6 +7,7 @@ import java.util.List;
 
 public class InputValidator {
     private static final List<String> VALID_MAIN_CHOICE = Arrays.asList("1","2","3");
+    private static final List<String> VALID_PAY_METHOD = Arrays.asList("1","2");
 
     private InputValidator() {
     }
@@ -33,6 +34,12 @@ public class InputValidator {
 
     public static void validateMenuNumber(int number) {
         if (!MenuRepository.getMenuNumbers().contains(number)) {
+            throw new IllegalArgumentException("올바른 메뉴를 선택해주세요.");
+        }
+    }
+
+    public static void validatePayMethod(String input) {
+        if (!VALID_PAY_METHOD.contains(input.trim())) {
             throw new IllegalArgumentException("올바른 메뉴를 선택해주세요.");
         }
     }
