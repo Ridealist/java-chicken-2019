@@ -11,7 +11,7 @@ public class OutputView {
     private static final String BOTTOM_LINE = "└ ─ ┘";
 
     // TODO enum 등을 활용해 효율적 관리 방안
-    public static void printMainMenu() {
+    public static void printMain() {
         System.out.println("## 메인화면");
         System.out.println("1 - 주문등록");
         System.out.println("2 - 결제하기");
@@ -32,6 +32,7 @@ public class OutputView {
         for (final Menu menu : menus) {
             System.out.println(menu);
         }
+        System.out.println();
     }
 
     private static void printLine(final String line, final int count) {
