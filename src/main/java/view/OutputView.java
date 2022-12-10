@@ -2,6 +2,7 @@ package view;
 
 import domain.Menu;
 import domain.Order;
+import domain.Pay;
 import domain.Table;
 
 import java.util.List;
@@ -66,6 +67,11 @@ public class OutputView {
 
     public static void printPay(final Table table) {
         System.out.printf(PAY_MESSAGE, table.getNumber());
+        System.out.println();
+    }
+
+    public static void printFinalCost(final Pay pay) {
+        System.out.println(pay.getDiscountPrice() + "원");
         System.out.println();
     }
 }
