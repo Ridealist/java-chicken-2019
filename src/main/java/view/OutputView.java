@@ -2,11 +2,10 @@ package view;
 
 import controller.Command;
 import domain.Menu;
-import domain.Order;
+import domain.OrderRepository;
 import domain.Pay;
 import domain.Table;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +13,9 @@ public class OutputView {
     public static final String ERROR = "[ERROR]";
     private static final String TOP_LINE = "┌ ─ ┐";
     private static final String TABLE_FORMAT = "| %s |";
-    private static final String BOTTOM_LINE = "└ ─ ┘";
+    private static final String BOTTOM_LINE_FORMAT = "└ %s ┘";
+    private static final String UN_ORDERED_BOTTOM_LINE = "─";
+    private static final String ORDERED_BOTTOM_LINE = "#";
     private static final String PAY_MESSAGE = "## %s번 테이블의 결제를 진행합니다.";
     private static final String ORDER_LIST_FORMAT = "%s %s %s";
 
@@ -35,7 +36,8 @@ public class OutputView {
         final int size = tables.size();
         printLine(TOP_LINE, size);
         printTableNumbers(tables);
-        printLine(BOTTOM_LINE, size);
+        printBottomLine(tables);
+        System.out.println();
     }
 
     public static void printMenus(final List<Menu> menus) {
@@ -50,6 +52,21 @@ public class OutputView {
             System.out.print(line);
         }
         System.out.println();
+    }
+
+    private static void printBottomLine(final List<Table> tables) {
+        for (final Table table : tables) {
+            printTableBottom(table);
+        }
+        System.out.println();
+    }
+
+    private static void printTableBottom(Table table) {
+        if (OrderRepository.hasOrdersOnTable(table)) {
+            System.out.printf(BOTTOM_LINE_FORMAT, ORDERED_BOTTOM_LINE);
+            return;
+        }
+        System.out.printf(BOTTOM_LINE_FORMAT, UN_ORDERED_BOTTOM_LINE);
     }
 
     private static void printTableNumbers(final List<Table> tables) {
@@ -68,6 +85,7 @@ public class OutputView {
             System.out.printf(ORDER_LIST_FORMAT, menu.getName(), menuCounts.get(menu), menu.getPrice());
             System.out.println();
         }
+        System.out.println();
     }
 
     public static void printPay(final Table table) {
