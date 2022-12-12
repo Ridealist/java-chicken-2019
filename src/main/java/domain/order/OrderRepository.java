@@ -19,6 +19,10 @@ public class OrderRepository {
         orders.removeAll(getOrdersByTable(pay.getTable()));
     }
 
+    public static void clear() {
+        orders.clear();
+    }
+
     public static List<Order> getOrdersByTable(final Table table) {
         return orders.stream()
                 .filter(order -> order.getTable().equals(table))
