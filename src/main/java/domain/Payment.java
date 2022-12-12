@@ -3,17 +3,17 @@ package domain;
 public class Payment {
     public static final int DISCOUNT_PRICE = 10000;
     public static final int DISCOUNT_UNIT = 10;
-    private final int totalPrice;
-    private final int discountPriceByChickenCategory;
+    private final int discountPriceByOrder;
 
     public Payment(Table table) {
-        this.totalPrice = table.totalPrice();
-        this.discountPriceByChickenCategory = getDiscountNumber(table) * DISCOUNT_PRICE;
-        System.out.println(totalPrice);
-        System.out.println(discountPriceByChickenCategory);
+        int totalPrice = table.totalPrice();
+        int discountPriceByChickenCategory = getDiscountNumber(table) * DISCOUNT_PRICE;
+        this.discountPriceByOrder = totalPrice - discountPriceByChickenCategory;
     }
 
     private static int getDiscountNumber(Table table) {
         return table.orderNumberOfChickenCategory() / DISCOUNT_UNIT;
     }
+
+
 }

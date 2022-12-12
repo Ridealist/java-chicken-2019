@@ -47,6 +47,9 @@ public class Table {
         return orderHistory;
     }
 
+    public int getNumber() {
+        return number;
+    }
 
     @Override
     public String toString() {

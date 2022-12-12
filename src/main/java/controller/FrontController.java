@@ -59,6 +59,7 @@ public class FrontController {
         OutputView.printOrderHistory(table.getOrderHistory());
         Payment payment = new Payment(table);
 
+        OutputView.printStartPayment(table.getNumber());
     }
 
     private void exitApplication() {

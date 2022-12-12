@@ -20,7 +20,6 @@ public class OutputView {
         final int size = tables.size();
         printLine(TOP_LINE, size);
         printTableNumbers(tables);
-        // printLine(BOTTOM_LINE, size);
         printMarkedLine(tables);
     }
 
@@ -69,6 +68,10 @@ public class OutputView {
         }
     }
 
+    public static void printStartPayment(int number) {
+        System.out.printf(Message.START_PAYMENT.message, number);
+    }
+
 
     private enum Message {
         MAIN_SCREEN("## 메인화면\n"
@@ -77,7 +80,8 @@ public class OutputView {
                 + "3 - 프로그램 종료"),
         ORDER_HISTORY("## 주문 내역\n"
                 + "메뉴 수량 금액"),
-        ORDER_HISTORY_FORMAT("%s %d %d%n");
+        ORDER_HISTORY_FORMAT("%s %d %d%n"),
+        START_PAYMENT("## %d번 테이블의 결제를 진행합니다.%n");
 
 
         private final String message;
