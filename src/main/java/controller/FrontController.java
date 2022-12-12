@@ -54,6 +54,8 @@ public class FrontController {
 
     private void payment() {
         OutputView.printTables(TableRepository.tables());
+        final Table table = InputView.inputTableNumber();
+        OutputView.printOrderHistory(table.getOrderHistory());
     }
 
     private void exitApplication() {

@@ -3,6 +3,7 @@ package view;
 import domain.Menu;
 import domain.Table;
 import java.util.List;
+import java.util.Map;
 
 public class OutputView {
     private static final String TOP_LINE = "┌ ─ ┐";
@@ -26,10 +27,10 @@ public class OutputView {
     private static void printMarkedLine(List<Table> tables) {
         StringBuilder lines = new StringBuilder();
         for (int index = 0; index < tables.size(); index++) {
-            if(tables.get(index).hasOrder()){
+            if (tables.get(index).hasOrder()) {
                 lines.append(MARKED_LINE);
             }
-            if(!tables.get(index).hasOrder()){
+            if (!tables.get(index).hasOrder()) {
                 lines.append(BOTTOM_LINE);
             }
         }
@@ -60,12 +61,24 @@ public class OutputView {
         System.out.println(exception.getMessage());
     }
 
+    public static void printOrderHistory(Map<Menu, Integer> orderHistory) {
+        System.out.println(Message.ORDER_HISTORY.message);
+        for (Menu menu : orderHistory.keySet()) {
+            System.out.printf(Message.ORDER_HISTORY_FORMAT.message,
+                    menu.getName(), orderHistory.get(menu), menu.getPrice());
+        }
+    }
+
 
     private enum Message {
         MAIN_SCREEN("## 메인화면\n"
                 + "1 - 주문등록\n"
                 + "2 - 결제하기\n"
-                + "3 - 프로그램 종료");
+                + "3 - 프로그램 종료"),
+        ORDER_HISTORY("## 주문 내역\n"
+                + "메뉴 수량 금액"),
+        ORDER_HISTORY_FORMAT("%s %d %d%n");
+
 
         private final String message;
 
