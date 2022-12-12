@@ -1,5 +1,7 @@
 package controller;
 
+import domain.OrderRepository;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import view.InputView;
 import view.OutputView;
@@ -10,31 +12,49 @@ public class MenuController {
 
     public void start() {
         while (isRun) {
-            run();
+            runPosController();
         }
     }
 
-    private void run() {
+    private void runPosController() {
         OutputView.printMain();
-        int command = repeat(InputView::inputFunctionNumber);
-        if (command == 3) {
-            isRun = false;
-            return;
-        }
-        if (command == 1) {
+        Command command = repeat(Command::findCommandByNumber, InputView::inputFunctionNumber);
+        chooseFunction(command);
+    }
+
+    private void chooseFunction(Command command) {
+        if (command == Command.REGISTER) {
             PosController.registerOrder();
         }
-        if (command == 2) {
-            PosController.pay();
+        if (command == Command.QUIT) {
+            isRun = false;
+        }
+        if (command == Command.PAY) {
+            executePay();
         }
     }
 
-    private static <T> T repeat(Supplier<T> inputReader) {
+    private void executePay() {
         try {
-            return inputReader.get();
+            validateAnyOrderExist();
+            PosController.payTable();
         } catch (IllegalArgumentException e) {
             OutputView.printError(e.getMessage());
-            return repeat(inputReader);
+        }
+    }
+
+    private static void validateAnyOrderExist() {
+        if (!OrderRepository.hasAnyOrders()) {
+            throw new IllegalArgumentException("등록된 주문이 하나도 없습니다. 주문을 먼저 등록해주세요.");
+        }
+    }
+
+    private static <T, R> R repeat(Function<T, R> object, Supplier<T> reader) {
+        try {
+            return object.apply(reader.get());
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e.getMessage());
+            return repeat(object, reader);
         }
     }
 }
