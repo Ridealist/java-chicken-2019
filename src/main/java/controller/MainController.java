@@ -17,6 +17,7 @@ public class MainController {
     private void initializeGameGuide() {
         controllers.put(MainOption.ORDER_REGISTRATION, new OrderRegistrationController());
         controllers.put(MainOption.PAYMENT, new PaymentController());
+        controllers.put(MainOption.APPLICATION_EXIT, new ApplicationExitController());
     }
 
 
