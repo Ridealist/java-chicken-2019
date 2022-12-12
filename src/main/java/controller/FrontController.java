@@ -57,6 +57,8 @@ public class FrontController {
         Menu menu = InputView.readMenu();
         System.out.println(menu);
 
+
+        int orderQuantity = InputView.readMenuQuantity();
         return null;
     }
 
