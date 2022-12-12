@@ -23,7 +23,6 @@ public class FrontController {
     private void initializeGameGuide() {
         gameGuide.put(MainOption.ORDER_REGISTRATION, this::orderRegistration);
         gameGuide.put(MainOption.PAYMENT, this::payment);
-        gameGuide.put(MainOption.APPLICATION_EXIT, this::exitApplication);
     }
 
 
@@ -63,9 +62,8 @@ public class FrontController {
         OutputView.printStartPayment(table.getNumber());
         PaymentType paymentType = InputView.readPaymentType();
         OutputView.printTotalPrice(payment.getFinalDiscountPrice(paymentType));
-    }
 
-    private void exitApplication() {
+        table.clearTable();
     }
 
 }

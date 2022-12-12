@@ -64,7 +64,7 @@ public class OutputView {
         System.out.println(Message.ORDER_HISTORY.message);
         for (Menu menu : orderHistory.keySet()) {
             System.out.printf(Message.ORDER_HISTORY_FORMAT.message,
-                    menu.getName(), orderHistory.get(menu), menu.getPrice());
+                    menu.getName(), orderHistory.get(menu), menu.getPrice() * orderHistory.get(menu));
         }
     }
 

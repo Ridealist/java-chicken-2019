@@ -43,6 +43,10 @@ public class Table {
         return numberOfChickenCategory;
     }
 
+    public void clearTable(){
+        orderHistory.clear();
+    }
+
     public Map<Menu, Integer> getOrderHistory() {
         return orderHistory;
     }
