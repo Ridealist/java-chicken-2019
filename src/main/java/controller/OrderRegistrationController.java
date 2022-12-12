@@ -8,15 +8,22 @@ import view.InputView;
 import view.OutputView;
 
 public class OrderRegistrationController implements Controllable {
-
     @Override
     public void process() {
-        OutputView.printTables(TableRepository.tables());
-        final Table table = InputView.inputTableNumber();
-        OutputView.printMenus(MenuRepository.menus());
+        selectTable().addOrder(selectMenu(), selectMenuQuantity());
+    }
 
-        Menu menu = InputView.readMenu();
-        int orderQuantity = InputView.readMenuQuantity();
-        table.addOrder(menu, orderQuantity);
+    private static int selectMenuQuantity() {
+        return InputView.readMenuQuantity();
+    }
+
+    private static Menu selectMenu() {
+        OutputView.printMenus(MenuRepository.menus());
+        return InputView.readMenu();
+    }
+
+    private static Table selectTable() {
+        OutputView.printTables(TableRepository.tables());
+        return InputView.inputTableNumber();
     }
 }
