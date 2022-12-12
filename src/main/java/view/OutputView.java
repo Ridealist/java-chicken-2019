@@ -4,6 +4,7 @@ import controller.Command;
 import domain.Menu;
 import domain.OrderRepository;
 import domain.Pay;
+import domain.PayMethod;
 import domain.Table;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class OutputView {
 
     public static void printError(String message) {
         System.out.println(ERROR + message);
+        System.out.println();
     }
 
     public static void printMain() {
@@ -76,7 +78,6 @@ public class OutputView {
         System.out.println();
     }
 
-    // TODO 금액에 수량을 곱한 금액이 나오도록 수정
     public static void printOrderList(final Pay pay) {
         System.out.println("## 주문 내역");
         System.out.println("메뉴 수량 금액");
@@ -94,7 +95,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printFinalCost(final Pay pay, int payMethod) {
+    public static void printFinalCost(final Pay pay, PayMethod payMethod) {
         System.out.println("## 최종 결제할 금액");
         System.out.println(pay.getDiscountPrice(payMethod) + "원");
         System.out.println();
