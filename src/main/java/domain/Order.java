@@ -1,20 +1,23 @@
 package domain;
 
 public class Order {
+    public static final int AMOUNT_PER_MENU_UPPER_BOUND = 99;
     private final Table table;
     private final Menu menu;
     private final int menuAmount;
 
-    public Order(Table table, Menu menu, int menuAmount) {
+    public Order(Table table, Menu menu, int menuAmount) throws IllegalArgumentException {
         this.table = table;
         this.menu = menu;
+        validateAmountOnMenu(table, menu, menuAmount);
         this.menuAmount = menuAmount;
     }
 
-    // TODO 필요없는 메서드 제거
-    @Override
-    public String toString() {
-        return "오더";
+    private static void validateAmountOnMenu(Table table, Menu menu, int menuAmount) {
+        int orderedMenuAmount = OrderRepository.countMenuAmountByTable(table, menu);
+        if (orderedMenuAmount + menuAmount > AMOUNT_PER_MENU_UPPER_BOUND) {
+            throw new IllegalArgumentException("테이블 당 한 메뉴를 최대 99개까지만 주문할 수 있습니다.");
+        }
     }
 
     public Table getTable() {
