@@ -6,7 +6,6 @@ import domain.Table;
 import domain.TableRepository;
 import domain.status.MainOption;
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 import view.InputView;
 import view.OutputView;
@@ -44,11 +43,9 @@ public class FrontController {
     }
 
     private void orderRegistration() {
-        final List<Table> tables = TableRepository.tables();
-        OutputView.printTables(tables);
+        OutputView.printTables(TableRepository.tables());
         final Table table = InputView.inputTableNumber();
-        final List<Menu> menus = MenuRepository.menus();
-        OutputView.printMenus(menus);
+        OutputView.printMenus(MenuRepository.menus());
 
         Menu menu = InputView.readMenu();
         int orderQuantity = InputView.readMenuQuantity();
@@ -56,6 +53,7 @@ public class FrontController {
     }
 
     private void payment() {
+        OutputView.printTables(TableRepository.tables());
     }
 
     private void exitApplication() {
