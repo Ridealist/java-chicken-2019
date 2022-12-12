@@ -1,5 +1,9 @@
-package domain;
+package domain.order;
 
+import domain.Category;
+import domain.pay.Pay;
+import domain.menu.Menu;
+import domain.table.Table;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

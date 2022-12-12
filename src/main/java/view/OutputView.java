@@ -1,11 +1,11 @@
 package view;
 
 import controller.Command;
-import domain.Menu;
-import domain.OrderRepository;
-import domain.Pay;
-import domain.PayMethod;
-import domain.Table;
+import domain.menu.Menu;
+import domain.order.OrderRepository;
+import domain.pay.Pay;
+import domain.pay.PayMethod;
+import domain.table.Table;
 
 import java.util.List;
 import java.util.Map;

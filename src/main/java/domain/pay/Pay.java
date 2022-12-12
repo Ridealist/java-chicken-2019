@@ -1,5 +1,10 @@
-package domain;
+package domain.pay;
 
+import domain.Category;
+import domain.menu.Menu;
+import domain.order.Order;
+import domain.order.OrderRepository;
+import domain.table.Table;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -1,6 +1,6 @@
 package controller;
 
-import domain.OrderRepository;
+import domain.order.OrderRepository;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import view.InputView;

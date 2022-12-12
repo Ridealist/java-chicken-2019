@@ -1,16 +1,14 @@
 package controller;
 
-import domain.Menu;
-import domain.MenuRepository;
-import domain.Order;
-import domain.OrderRepository;
-import domain.Pay;
-import domain.PayMethod;
-import domain.Table;
-import domain.TableRepository;
+import domain.menu.Menu;
+import domain.menu.MenuRepository;
+import domain.order.Order;
+import domain.order.OrderRepository;
+import domain.pay.Pay;
+import domain.pay.PayMethod;
+import domain.table.Table;
+import domain.table.TableRepository;
 import java.util.List;
-import java.util.function.Function;
-import java.util.function.Supplier;
 import view.InputView;
 import view.OutputView;
 

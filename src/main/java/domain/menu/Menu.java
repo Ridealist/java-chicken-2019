@@ -1,4 +1,6 @@
-package domain;
+package domain.menu;
+
+import domain.Category;
 
 public class Menu {
     private final int number;

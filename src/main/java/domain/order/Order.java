@@ -1,4 +1,7 @@
-package domain;
+package domain.order;
+
+import domain.menu.Menu;
+import domain.table.Table;
 
 public class Order {
     public static final int AMOUNT_PER_MENU_UPPER_BOUND = 99;
