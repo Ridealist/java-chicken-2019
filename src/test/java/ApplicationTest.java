@@ -77,6 +77,17 @@ class ApplicationTest extends NsTest {
                 }
         );
     }
+
+    @Test
+    void 한_메뉴_최대_기준치_초과_주문_테스트() {
+        assertSimpleTest(
+                () -> {
+                    runException("1", "1", "1", "85", "1", "1", "1", "15");
+                    assertThat(output()).contains(ERROR_MESSAGE);
+                }
+        );
+    }
+    
     @Override
     protected void runMain() {
         Application.main(new String[]{});
