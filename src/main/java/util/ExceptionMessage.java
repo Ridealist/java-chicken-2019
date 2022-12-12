@@ -3,6 +3,8 @@ package util;
 public enum ExceptionMessage {
 
     NO_MAIN_OPTION("해당 메인 옵션이 존재하지 않습니다."),
+    NO_SUCH_MENU("해당 메뉴가 존재하지 않습니다."),
+
     INVALID_NOT_NUMERIC("자연수만 입력 가능합니다."),
     INVALID_OUT_OF_INT_RANGE("입력 범위를 초과하였습니다.");
 

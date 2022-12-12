@@ -9,7 +9,7 @@ public class OutputView {
     private static final String TABLE_FORMAT = "| %s |";
     private static final String BOTTOM_LINE = "└ ─ ┘";
 
-    public void printMainScreen() {
+    public static void printMainScreen() {
         System.out.println(Message.MAIN_SCREEN.message);
     }
 
@@ -41,7 +41,7 @@ public class OutputView {
         System.out.println();
     }
 
-    public void printExceptionMessage(IllegalArgumentException exception) {
+    public static void printExceptionMessage(IllegalArgumentException exception) {
         System.out.println(exception.getMessage());
     }
 

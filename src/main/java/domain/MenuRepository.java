@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import util.ExceptionMessage;
 
 public class MenuRepository {
     private static final List<Menu> menus = new ArrayList<>();
@@ -20,5 +21,11 @@ public class MenuRepository {
 
     public static List<Menu> menus() {
         return Collections.unmodifiableList(menus);
+    }
+
+    public static Menu from(String number) {
+        return menus.stream().filter(menu -> menu.isSame(number))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException(ExceptionMessage.NO_SUCH_MENU.getMessage()));
     }
 }
