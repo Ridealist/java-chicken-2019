@@ -2,6 +2,8 @@ package view;
 
 import domain.Menu;
 import domain.Table;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +12,7 @@ public class OutputView {
     private static final String TABLE_FORMAT = "| %s |";
     private static final String BOTTOM_LINE = "└ ─ ┘";
     private static final String MARKED_LINE = "└ # ┘";
+    public static final String DECIMAL_FORMAT = "#0";
 
     public static void printExceptionMessage(IllegalArgumentException exception) {
         System.out.println(exception.getMessage());
@@ -74,9 +77,13 @@ public class OutputView {
         System.out.printf(Message.START_PAYMENT.message, number);
     }
 
-    public static void printTotalPrice(int totalPrice) {
-        System.out.printf(Message.TOTAL_PRICE.message, totalPrice);
+    public static void printTotalPrice(BigDecimal totalPrice) {
+        System.out.printf(Message.TOTAL_PRICE.message, formatTotalPrice(totalPrice));
         System.out.println();
+    }
+
+    private static String formatTotalPrice(BigDecimal totalPrice) {
+        return new DecimalFormat(DECIMAL_FORMAT).format(totalPrice);
     }
 
     private enum Message {
@@ -89,7 +96,7 @@ public class OutputView {
         ORDER_HISTORY_FORMAT("%s %d %d%n"),
         START_PAYMENT("## %d번 테이블의 결제를 진행합니다.%n"),
         TOTAL_PRICE("## 최종 결제할 금액\n"
-                + "%d원%n");
+                + "%s원%n");
 
 
         private final String message;
