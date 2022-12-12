@@ -6,10 +6,10 @@ import java.util.Map;
 import view.InputView;
 import view.OutputView;
 
-public class FrontController {
+public class MainController {
     private final Map<MainOption, Controllable> controllers;
 
-    public FrontController() {
+    public MainController() {
         this.controllers = new EnumMap<>(MainOption.class);
         initializeGameGuide();
     }

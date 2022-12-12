@@ -1,9 +1,9 @@
-import controller.FrontController;
+import controller.MainController;
 
 public class Application {
     // TODO 구현 진행
     public static void main(String[] args) {
-        FrontController frontController = new FrontController();
-        frontController.service();
+        MainController mainController = new MainController();
+        mainController.service();
     }
 }
