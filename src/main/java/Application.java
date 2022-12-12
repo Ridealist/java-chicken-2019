@@ -1,21 +1,20 @@
-import domain.Menu;
-import domain.MenuRepository;
-import domain.Table;
-import domain.TableRepository;
+import controller.FrontController;
+import domain.status.MainOption;
 import view.InputView;
 import view.OutputView;
-
-import java.util.List;
 
 public class Application {
     // TODO 구현 진행
     public static void main(String[] args) {
-        final List<Table> tables = TableRepository.tables();
-        OutputView.printTables(tables);
+        InputView inputView = new InputView();
+        OutputView outputView = new OutputView();
 
-        final int tableNumber = InputView.inputTableNumber();
+        MainOption mainOption = MainOption.INITIALIZE_APPLICATION;
+        FrontController frontController = new FrontController(inputView, outputView);
 
-        final List<Menu> menus = MenuRepository.menus();
-        OutputView.printMenus(menus);
+        frontController.service(mainOption);
+
+
+
     }
 }
