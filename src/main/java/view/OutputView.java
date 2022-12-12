@@ -11,6 +11,10 @@ public class OutputView {
     private static final String BOTTOM_LINE = "└ ─ ┘";
     private static final String MARKED_LINE = "└ # ┘";
 
+    public static void printExceptionMessage(IllegalArgumentException exception) {
+        System.out.println(exception.getMessage());
+    }
+
     public static void printMainScreen() {
         System.out.println(Message.MAIN_SCREEN.message);
     }
@@ -21,6 +25,7 @@ public class OutputView {
         printLine(TOP_LINE, size);
         printTableNumbers(tables);
         printMarkedLine(tables);
+        System.out.println();
     }
 
     private static void printMarkedLine(List<Table> tables) {
@@ -56,9 +61,6 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printExceptionMessage(IllegalArgumentException exception) {
-        System.out.println(exception.getMessage());
-    }
 
     public static void printOrderHistory(Map<Menu, Integer> orderHistory) {
         System.out.println(Message.ORDER_HISTORY.message);
@@ -66,6 +68,7 @@ public class OutputView {
             System.out.printf(Message.ORDER_HISTORY_FORMAT.message,
                     menu.getName(), orderHistory.get(menu), menu.getPrice() * orderHistory.get(menu));
         }
+        System.out.println();
     }
 
     public static void printStartPayment(int number) {
@@ -74,13 +77,14 @@ public class OutputView {
 
     public static void printTotalPrice(int totalPrice) {
         System.out.printf(Message.TOTAL_PRICE.message, totalPrice);
+        System.out.println();
     }
 
     private enum Message {
         MAIN_SCREEN("## 메인화면\n"
                 + "1 - 주문등록\n"
                 + "2 - 결제하기\n"
-                + "3 - 프로그램 종료"),
+                + "3 - 프로그램 종료%n"),
         ORDER_HISTORY("## 주문 내역\n"
                 + "메뉴 수량 금액"),
         ORDER_HISTORY_FORMAT("%s %d %d%n"),
