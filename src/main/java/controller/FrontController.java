@@ -6,6 +6,7 @@ import domain.Payment;
 import domain.Table;
 import domain.TableRepository;
 import domain.status.MainOption;
+import domain.status.PaymentType;
 import java.util.EnumMap;
 import java.util.Map;
 import view.InputView;
@@ -60,6 +61,9 @@ public class FrontController {
         Payment payment = new Payment(table);
 
         OutputView.printStartPayment(table.getNumber());
+        PaymentType paymentType = InputView.readPaymentType();
+
+
     }
 
     private void exitApplication() {

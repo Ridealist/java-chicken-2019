@@ -6,6 +6,7 @@ import domain.MenuRepository;
 import domain.Table;
 import domain.TableRepository;
 import domain.status.MainOption;
+import domain.status.PaymentType;
 import java.util.Scanner;
 import util.Util;
 import util.validator.MenuQuantityValidator;
@@ -35,11 +36,17 @@ public class InputView {
         return Integer.parseInt(input);
     }
 
+    public static PaymentType readPaymentType() {
+        System.out.println(Message.SELECT_PAYMENT_TYPE.message);
+        return PaymentType.from(Util.removeSpace(Console.readLine()));
+    }
+
     private enum Message {
         SELECT_TABLE("## 테이블을 선택하세요."),
         SELECT_MAIN_OPTION("## 원하는 기능을 선택하세요."),
         SELECT_MENU("## 등록할 메뉴를 선택하세요."),
-        SELECT_MENU_QUANTITY("## 메뉴의 수량을 입력하세요.");
+        SELECT_MENU_QUANTITY("## 메뉴의 수량을 입력하세요."),
+        SELECT_PAYMENT_TYPE("## 신용 카드는 1번, 현금은 2번");
 
         private final String message;
 

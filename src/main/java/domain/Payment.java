@@ -1,5 +1,7 @@
 package domain;
 
+import domain.status.PaymentType;
+
 public class Payment {
     public static final int DISCOUNT_PRICE = 10000;
     public static final int DISCOUNT_UNIT = 10;
@@ -11,8 +13,15 @@ public class Payment {
         this.discountPriceByOrder = totalPrice - discountPriceByChickenCategory;
     }
 
-    private static int getDiscountNumber(Table table) {
+    private int getDiscountNumber(Table table) {
         return table.orderNumberOfChickenCategory() / DISCOUNT_UNIT;
+    }
+
+    public int getFinalDiscountPrice(PaymentType paymentType) {
+        if(paymentType == PaymentType.CASH){
+            return (int) (discountPriceByOrder * 0.95);
+        }
+        return discountPriceByOrder;
     }
 
 
