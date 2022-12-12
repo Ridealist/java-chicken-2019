@@ -20,31 +20,28 @@ public class FrontController {
     }
 
     private void initializeGameGuide() {
-        gameGuide.put(MainOption.INITIALIZE_APPLICATION, this::initializeApplication);
         gameGuide.put(MainOption.ORDER_REGISTRATION, this::orderRegistration);
         gameGuide.put(MainOption.PAYMENT, this::payment);
+        gameGuide.put(MainOption.APPLICATION_EXIT, this::exitApplication);
     }
 
 
-    public void service(MainOption mainOption) {
+    public void service() {
+        MainOption mainOption;
         do {
             outputView.printMainScreen();
-            progress(inputView.readMainOption());
+            mainOption = inputView.readMainOption();
+            progress(mainOption);
         } while (mainOption.isPlayable());
     }
 
     public MainOption progress(MainOption mainOption) {
         try {
             return gameGuide.get(mainOption).get();
-        } catch (
-                IllegalArgumentException exception) {
+        } catch (IllegalArgumentException exception) {
             outputView.printExceptionMessage(exception);
             return mainOption;
         }
-    }
-
-    private MainOption initializeApplication() {
-        return null;
     }
 
     private MainOption orderRegistration() {
@@ -55,7 +52,8 @@ public class FrontController {
         return null;
     }
 
-
-
+    private MainOption exitApplication() {
+        return null;
+    }
 
 }

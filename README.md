@@ -3,7 +3,7 @@
 #### 0. 게임 초기 설정 `INITIALIZE_APPLICATION`
 
 - [x] 메인 화면 출력
-- [ ] 메인 기능 선택
+- [x] 메인 기능 선택
 
 #### 1. 주문 등록 `ORDER_REGISTRATION`
 

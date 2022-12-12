@@ -9,10 +9,8 @@ public class Application {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
 
-        MainOption mainOption = MainOption.INITIALIZE_APPLICATION;
         FrontController frontController = new FrontController(inputView, outputView);
-
-        frontController.service(mainOption);
+        frontController.service();
 
 
 

@@ -14,8 +14,7 @@ public class InputView {
 
     public MainOption readMainOption() {
         System.out.println(Message.SELECT_MAIN_OPTION.message);
-        String input = Console.readLine();
-        return null;
+        return MainOption.from(Console.readLine());
     }
 
     private enum Message {
