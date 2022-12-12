@@ -3,7 +3,6 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MenuRepository {
     private static final List<Menu> menus = new ArrayList<>();
@@ -27,12 +26,6 @@ public class MenuRepository {
         return menus.stream()
                 .filter(menu -> menu.getNumber() == number)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("등록되지 않은 메뉴입니다."));
-    }
-
-    public static List<Integer> getMenuNumbers() {
-        return menus.stream()
-                .map(Menu::getNumber)
-                .collect(Collectors.toList());
+                .orElseThrow(() -> new IllegalArgumentException("등록되지 않은 메뉴입니다. 올바른 메뉴를 선택해주세요."));
     }
 }

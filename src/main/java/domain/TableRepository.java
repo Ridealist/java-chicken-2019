@@ -3,7 +3,6 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TableRepository {
     private static final List<Table> tables = new ArrayList<>();
@@ -21,16 +20,10 @@ public class TableRepository {
         return Collections.unmodifiableList(tables);
     }
 
-    public static List<Integer> getTableNumbers() {
-        return tables.stream()
-                .map(Table::getNumber)
-                .collect(Collectors.toList());
-    }
-
-    public static Table findMenuByNumber(int number) {
+    public static Table findTableByNumber(int number) {
         return tables.stream()
                 .filter(menu -> menu.getNumber() == number)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("등록되지 않은 테이블입니다."));
+                .orElseThrow(() -> new IllegalArgumentException("등록되지 않은 테이블입니다. 올바른 테이블 번호를 입력해주세요."));
     }
 }
