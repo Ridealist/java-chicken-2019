@@ -62,8 +62,7 @@ public class FrontController {
 
         OutputView.printStartPayment(table.getNumber());
         PaymentType paymentType = InputView.readPaymentType();
-
-
+        OutputView.printTotalPrice(payment.getFinalDiscountPrice(paymentType));
     }
 
     private void exitApplication() {

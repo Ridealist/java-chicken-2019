@@ -72,6 +72,9 @@ public class OutputView {
         System.out.printf(Message.START_PAYMENT.message, number);
     }
 
+    public static void printTotalPrice(int totalPrice) {
+        System.out.printf(Message.TOTAL_PRICE.message, totalPrice);
+    }
 
     private enum Message {
         MAIN_SCREEN("## 메인화면\n"
@@ -81,7 +84,9 @@ public class OutputView {
         ORDER_HISTORY("## 주문 내역\n"
                 + "메뉴 수량 금액"),
         ORDER_HISTORY_FORMAT("%s %d %d%n"),
-        START_PAYMENT("## %d번 테이블의 결제를 진행합니다.%n");
+        START_PAYMENT("## %d번 테이블의 결제를 진행합니다.%n"),
+        TOTAL_PRICE("## 최종 결제할 금액\n"
+                + "%d원%n");
 
 
         private final String message;
