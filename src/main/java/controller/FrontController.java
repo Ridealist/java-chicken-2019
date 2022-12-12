@@ -49,7 +49,7 @@ public class FrontController {
         final List<Table> tables = TableRepository.tables();
         OutputView.printTables(tables);
 
-        final int tableNumber = InputView.inputTableNumber();
+        final Table table = InputView.inputTableNumber();
 
         final List<Menu> menus = MenuRepository.menus();
         OutputView.printMenus(menus);
@@ -59,6 +59,7 @@ public class FrontController {
 
 
         int orderQuantity = InputView.readMenuQuantity();
+
         return null;
     }
 

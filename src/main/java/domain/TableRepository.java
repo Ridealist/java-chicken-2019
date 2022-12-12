@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import util.ExceptionMessage;
 
 public class TableRepository {
     private static final List<Table> tables = new ArrayList<>();
@@ -18,5 +19,12 @@ public class TableRepository {
 
     public static List<Table> tables() {
         return Collections.unmodifiableList(tables);
+    }
+
+    public static Table from(String number) {
+        return tables.stream()
+                .filter(table -> table.isSame(number))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException(ExceptionMessage.NO_SUCH_TABLE.getMessage()));
     }
 }

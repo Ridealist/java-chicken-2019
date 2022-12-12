@@ -7,6 +7,9 @@ public class Table {
         this.number = number;
     }
 
+    public boolean isSame(String number){
+        return String.valueOf(this.number).equals(number);
+    }
     @Override
     public String toString() {
         return Integer.toString(number);
