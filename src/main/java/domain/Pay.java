@@ -13,7 +13,6 @@ public class Pay {
     private final Table table;
     private final List<Order> orders;
 
-    // TODO 주문 내역이 없는 테이블은 계산 불가
     public Pay(Table table) throws IllegalArgumentException {
         validateOrderOnTable(table);
         this.table = table;
@@ -26,9 +25,13 @@ public class Pay {
         }
     }
 
-    public int getDiscountPrice(int number) {
-        int cost = getOriginalTotalCost() - calculateMenuDiscount();
-        return (int) calculatePayDiscount(cost, PayMethod.getMethodByNumber(number));
+    // TODO 리팩터링 하기!
+    public Map<Menu, Integer> aggregateMenus() {
+        Map<Menu, Integer> menusCounts = new HashMap<>();
+        for (Menu menu : getUniqueMenus()) {
+            menusCounts.put(menu, countMenusFormOrders(menu));
+        }
+        return menusCounts;
     }
 
     private Set<Menu> getUniqueMenus() {
@@ -45,13 +48,9 @@ public class Pay {
                 .sum();
     }
 
-    // TODO 리팩터링 하기!
-    public Map<Menu, Integer> aggregateMenus() {
-        Map<Menu, Integer> menusCounts = new HashMap<>();
-        for (Menu menu : getUniqueMenus()) {
-            menusCounts.put(menu, countMenusFormOrders(menu));
-        }
-        return menusCounts;
+    public int getDiscountPrice(PayMethod payMethod) {
+        int cost = getOriginalTotalCost() - calculateMenuDiscount();
+        return (int) calculatePayDiscount(cost, payMethod);
     }
 
     private int getOriginalTotalCost() {
@@ -63,7 +62,7 @@ public class Pay {
     }
 
     private int calculateMenuDiscount() {
-        int menuCount = OrderRepository.countChickenMenuByTable(table);
+        int menuCount = OrderRepository.countMenuAmountByTableAndCategory(table, Category.CHICKEN);
         return (menuCount / MENU_DISCOUNT_CRITERIA) * DISCOUNT_PRICE;
     }
 
