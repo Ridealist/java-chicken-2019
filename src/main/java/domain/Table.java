@@ -23,9 +23,30 @@ public class Table {
         return !orderHistory.isEmpty();
     }
 
+    public int totalPrice() {
+        int totalPrice = 0;
+        for (Menu menu : orderHistory.keySet()) {
+            int orderQuantity = orderHistory.get(menu);
+            int menuPrice = menu.getPrice();
+            totalPrice += orderQuantity * menuPrice;
+        }
+        return totalPrice;
+    }
+
+    public int orderNumberOfChickenCategory() {
+        int numberOfChickenCategory = 0;
+        for (Menu menu : orderHistory.keySet()) {
+            if (menu.isChickenCategory()) {
+                numberOfChickenCategory += orderHistory.get(menu);
+            }
+        }
+        return numberOfChickenCategory;
+    }
+
     public Map<Menu, Integer> getOrderHistory() {
         return orderHistory;
     }
+
 
     @Override
     public String toString() {

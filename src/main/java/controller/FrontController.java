@@ -2,6 +2,7 @@ package controller;
 
 import domain.Menu;
 import domain.MenuRepository;
+import domain.Payment;
 import domain.Table;
 import domain.TableRepository;
 import domain.status.MainOption;
@@ -56,6 +57,8 @@ public class FrontController {
         OutputView.printTables(TableRepository.tables());
         final Table table = InputView.inputTableNumber();
         OutputView.printOrderHistory(table.getOrderHistory());
+        Payment payment = new Payment(table);
+
     }
 
     private void exitApplication() {
