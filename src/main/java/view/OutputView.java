@@ -17,6 +17,7 @@ public class OutputView {
 
     public static void printMainScreen() {
         System.out.println(Message.MAIN_SCREEN.message);
+        System.out.println();
     }
 
     public static void printTables(final List<Table> tables) {
@@ -29,16 +30,14 @@ public class OutputView {
     }
 
     private static void printMarkedLine(List<Table> tables) {
-        StringBuilder lines = new StringBuilder();
         for (int index = 0; index < tables.size(); index++) {
             if (tables.get(index).hasOrder()) {
-                lines.append(MARKED_LINE);
+                System.out.print(MARKED_LINE);
+                continue;
             }
-            if (!tables.get(index).hasOrder()) {
-                lines.append(BOTTOM_LINE);
-            }
+            System.out.print(BOTTOM_LINE);
         }
-        System.out.println(lines);
+        System.out.println();
     }
 
     public static void printMenus(final List<Menu> menus) {
@@ -84,7 +83,7 @@ public class OutputView {
         MAIN_SCREEN("## 메인화면\n"
                 + "1 - 주문등록\n"
                 + "2 - 결제하기\n"
-                + "3 - 프로그램 종료%n"),
+                + "3 - 프로그램 종료"),
         ORDER_HISTORY("## 주문 내역\n"
                 + "메뉴 수량 금액"),
         ORDER_HISTORY_FORMAT("%s %d %d%n"),
@@ -98,5 +97,8 @@ public class OutputView {
         Message(String message) {
             this.message = message;
         }
+    }
+
+    private OutputView() {
     }
 }

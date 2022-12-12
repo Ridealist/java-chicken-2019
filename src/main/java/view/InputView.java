@@ -52,5 +52,8 @@ public class InputView {
             this.message = message;
         }
     }
+
+    private InputView() {
+    }
 }
 ;
