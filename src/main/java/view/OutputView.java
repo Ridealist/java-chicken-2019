@@ -8,6 +8,7 @@ public class OutputView {
     private static final String TOP_LINE = "┌ ─ ┐";
     private static final String TABLE_FORMAT = "| %s |";
     private static final String BOTTOM_LINE = "└ ─ ┘";
+    private static final String MARKED_LINE = "└ # ┘";
 
     public static void printMainScreen() {
         System.out.println(Message.MAIN_SCREEN.message);
@@ -18,7 +19,21 @@ public class OutputView {
         final int size = tables.size();
         printLine(TOP_LINE, size);
         printTableNumbers(tables);
-        printLine(BOTTOM_LINE, size);
+        // printLine(BOTTOM_LINE, size);
+        printMarkedLine(tables);
+    }
+
+    private static void printMarkedLine(List<Table> tables) {
+        StringBuilder lines = new StringBuilder();
+        for (int index = 0; index < tables.size(); index++) {
+            if(tables.get(index).hasOrder()){
+                lines.append(MARKED_LINE);
+            }
+            if(!tables.get(index).hasOrder()){
+                lines.append(BOTTOM_LINE);
+            }
+        }
+        System.out.println(lines);
     }
 
     public static void printMenus(final List<Menu> menus) {
