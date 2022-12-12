@@ -11,6 +11,7 @@ public class Order {
         this.menuAmount = menuAmount;
     }
 
+    // TODO 필요없는 메서드 제거
     @Override
     public String toString() {
         return "오더";
