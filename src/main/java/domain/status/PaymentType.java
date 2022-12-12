@@ -5,13 +5,11 @@ import util.ExceptionMessage;
 
 public enum PaymentType {
 
-    CARD("카드", "1"), CASH("현금", "2");
+    CARD("1"), CASH("2");
 
-    private final String type;
     private final String command;
 
-    PaymentType(String type, String command) {
-        this.type = type;
+    PaymentType(String command) {
         this.command = command;
     }
 

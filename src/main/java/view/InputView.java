@@ -7,12 +7,10 @@ import domain.Table;
 import domain.TableRepository;
 import domain.status.MainOption;
 import domain.status.PaymentType;
-import java.util.Scanner;
 import util.Util;
 import util.validator.MenuQuantityValidator;
 
 public class InputView {
-    private static final Scanner scanner = new Scanner(System.in);
 
     public static Table inputTableNumber() {
         System.out.println(Message.SELECT_TABLE.message);
