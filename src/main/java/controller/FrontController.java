@@ -8,12 +8,11 @@ import domain.status.MainOption;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 import view.InputView;
 import view.OutputView;
 
 public class FrontController {
-    private final Map<MainOption, Supplier<MainOption>> gameGuide;
+    private final Map<MainOption, Runnable> gameGuide;
 
     public FrontController() {
         this.gameGuide = new EnumMap<>(MainOption.class);
@@ -36,39 +35,30 @@ public class FrontController {
         } while (mainOption.isPlayable());
     }
 
-    public MainOption progress(MainOption mainOption) {
+    public void progress(MainOption mainOption) {
         try {
-            return gameGuide.get(mainOption).get();
+            gameGuide.get(mainOption).run();
         } catch (IllegalArgumentException exception) {
             OutputView.printExceptionMessage(exception);
-            return mainOption;
         }
     }
 
-    private MainOption orderRegistration() {
+    private void orderRegistration() {
         final List<Table> tables = TableRepository.tables();
         OutputView.printTables(tables);
-
         final Table table = InputView.inputTableNumber();
-
         final List<Menu> menus = MenuRepository.menus();
         OutputView.printMenus(menus);
 
         Menu menu = InputView.readMenu();
-        System.out.println(menu);
-
-
         int orderQuantity = InputView.readMenuQuantity();
-
-        return null;
+        table.addOrder(menu, orderQuantity);
     }
 
-    private MainOption payment() {
-        return null;
+    private void payment() {
     }
 
-    private MainOption exitApplication() {
-        return null;
+    private void exitApplication() {
     }
 
 }
