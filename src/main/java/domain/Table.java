@@ -48,7 +48,7 @@ public class Table {
     }
 
     public Map<Menu, Integer> getOrderHistory() {
-        return orderHistory;
+        return Collections.unmodifiableMap(orderHistory);
     }
 
     public int getNumber() {
