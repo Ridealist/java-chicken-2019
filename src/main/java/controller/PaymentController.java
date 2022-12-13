@@ -3,7 +3,7 @@ package controller;
 import domain.Payment;
 import domain.Table;
 import domain.TableRepository;
-import domain.status.PaymentType;
+import domain.PaymentType;
 import view.InputView;
 import view.OutputView;
 

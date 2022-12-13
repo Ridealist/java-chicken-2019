@@ -1,6 +1,5 @@
 package domain;
 
-import domain.status.PaymentType;
 import java.math.BigDecimal;
 
 public class Payment {
@@ -20,10 +19,7 @@ public class Payment {
     }
 
     public BigDecimal getFinalDiscountPrice(PaymentType paymentType) {
-        if (paymentType == PaymentType.CASH) {
-            return discountPriceByOrder.multiply(new BigDecimal("0.95"));
-        }
-        return discountPriceByOrder;
+        return discountPriceByOrder.multiply(paymentType.getDiscountRate());
     }
 
 

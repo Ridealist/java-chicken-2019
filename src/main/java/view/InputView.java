@@ -6,7 +6,7 @@ import domain.MenuRepository;
 import domain.Table;
 import domain.TableRepository;
 import domain.status.MainOption;
-import domain.status.PaymentType;
+import domain.PaymentType;
 import util.Util;
 import util.validator.MenuQuantityValidator;
 
