@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 
 class TableTest {
 
-    public static final int FRIED_CHICKEN_INDEX = 0;
-    public static final int ORDER_QUANTITY = 10;
+    private static final int FRIED_CHICKEN_INDEX = 0;
+    private static final int ORDER_QUANTITY = 10;
     private Table table;
 
     @BeforeEach
