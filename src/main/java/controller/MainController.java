@@ -8,24 +8,28 @@ import view.OutputView;
 
 public class MainController {
     private final Map<MainOption, Controllable> controllers;
+    private final InputView inputView;
+    private final OutputView outputView;
 
-    public MainController() {
+    public MainController(InputView inputView, OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
         this.controllers = new EnumMap<>(MainOption.class);
-        initializeGameGuide();
+        initializeControllers();
     }
 
-    private void initializeGameGuide() {
-        controllers.put(MainOption.ORDER_REGISTRATION, new OrderRegistrationController());
-        controllers.put(MainOption.PAYMENT, new PaymentController());
-        controllers.put(MainOption.APPLICATION_EXIT, new ApplicationExitController());
+    private void initializeControllers() {
+        controllers.put(MainOption.ORDER_REGISTRATION, new OrderRegistrationController(inputView, outputView));
+        controllers.put(MainOption.PAYMENT, new PaymentController(inputView, outputView));
+        controllers.put(MainOption.APPLICATION_EXIT, new ApplicationExitController(inputView, outputView));
     }
 
 
     public void service() {
         MainOption mainOption;
         do {
-            OutputView.printMainScreen();
-            mainOption = InputView.readMainOption();
+            outputView.printMainScreen();
+            mainOption = inputView.readMainOption();
             progress(mainOption);
         } while (mainOption.isPlayable());
     }
@@ -34,7 +38,7 @@ public class MainController {
         try {
             controllers.get(mainOption).process();
         } catch (IllegalArgumentException exception) {
-            OutputView.printExceptionMessage(exception);
+            outputView.printExceptionMessage(exception);
         }
     }
 

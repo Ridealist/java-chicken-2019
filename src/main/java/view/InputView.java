@@ -3,38 +3,47 @@ package view;
 import camp.nextstep.edu.missionutils.Console;
 import domain.Menu;
 import domain.MenuRepository;
+import domain.PaymentType;
 import domain.Table;
 import domain.TableRepository;
 import domain.status.MainOption;
-import domain.PaymentType;
 import util.Util;
 import util.validator.MenuQuantityValidator;
 
 public class InputView {
 
-    public static Table inputTableNumber() {
+    private static final InputView instance = new InputView();
+
+    public static InputView getInstance() {
+        return instance;
+    }
+
+    private InputView() {
+    }
+
+    public Table inputTableNumber() {
         System.out.println(Message.SELECT_TABLE.message);
         return TableRepository.from(Console.readLine());
     }
 
-    public static MainOption readMainOption() {
+    public MainOption readMainOption() {
         System.out.println(Message.SELECT_MAIN_OPTION.message);
         return MainOption.from(Util.removeSpace(Console.readLine()));
     }
 
-    public static Menu readMenu() {
+    public Menu readMenu() {
         System.out.println(Message.SELECT_MENU.message);
         return MenuRepository.from(Util.removeSpace(Console.readLine()));
     }
 
-    public static int readMenuQuantity() {
+    public int readMenuQuantity() {
         System.out.println(Message.SELECT_MENU_QUANTITY.message);
         String input = Util.removeSpace(Console.readLine());
         new MenuQuantityValidator().validate(input);
         return Integer.parseInt(input);
     }
 
-    public static PaymentType readPaymentType() {
+    public PaymentType readPaymentType() {
         System.out.println(Message.SELECT_PAYMENT_TYPE.message);
         return PaymentType.from(Util.removeSpace(Console.readLine()));
     }
@@ -53,7 +62,4 @@ public class InputView {
         }
     }
 
-    private InputView() {
-    }
 }
-;

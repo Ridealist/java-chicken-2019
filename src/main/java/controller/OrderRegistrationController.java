@@ -8,22 +8,31 @@ import view.InputView;
 import view.OutputView;
 
 public class OrderRegistrationController implements Controllable {
+
+    private final InputView inputView;
+    private final OutputView outputView;
+
+    public OrderRegistrationController(InputView inputView, OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
+
     @Override
     public void process() {
         selectTable().addOrder(selectMenu(), selectMenuQuantity());
     }
 
-    private static int selectMenuQuantity() {
-        return InputView.readMenuQuantity();
+    private int selectMenuQuantity() {
+        return inputView.readMenuQuantity();
     }
 
-    private static Menu selectMenu() {
-        OutputView.printMenus(MenuRepository.menus());
-        return InputView.readMenu();
+    private Menu selectMenu() {
+        outputView.printMenus(MenuRepository.menus());
+        return inputView.readMenu();
     }
 
-    private static Table selectTable() {
-        OutputView.printTables(TableRepository.tables());
-        return InputView.inputTableNumber();
+    private Table selectTable() {
+        outputView.printTables(TableRepository.tables());
+        return inputView.inputTableNumber();
     }
 }

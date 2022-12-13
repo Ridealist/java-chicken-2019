@@ -1,28 +1,36 @@
 package controller;
 
 import domain.Payment;
+import domain.PaymentType;
 import domain.Table;
 import domain.TableRepository;
-import domain.PaymentType;
 import view.InputView;
 import view.OutputView;
 
 public class PaymentController implements Controllable {
 
+    private final InputView inputView;
+    private final OutputView outputView;
+
+    public PaymentController(InputView inputView, OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+    }
+
     @Override
     public void process() {
         final Table table = selectTable();
-        OutputView.printOrderHistory(table.getOrderHistory());
+        outputView.printOrderHistory(table.getOrderHistory());
         Payment payment = new Payment(table);
-        OutputView.printStartPayment(table.getNumber());
-        PaymentType paymentType = InputView.readPaymentType();
-        OutputView.printTotalPrice(payment.getFinalDiscountPrice(paymentType));
+        outputView.printStartPayment(table.getNumber());
+        PaymentType paymentType = inputView.readPaymentType();
+        outputView.printTotalPrice(payment.getFinalDiscountPrice(paymentType));
         table.clearTable();
     }
 
-    private static Table selectTable() {
-        OutputView.printTables(TableRepository.tables());
-        return InputView.inputTableNumber();
+    private Table selectTable() {
+        outputView.printTables(TableRepository.tables());
+        return inputView.inputTableNumber();
     }
 
 }

@@ -14,16 +14,25 @@ public class OutputView {
     private static final String MARKED_LINE = "└ # ┘";
     public static final String DECIMAL_FORMAT = "#0";
 
-    public static void printExceptionMessage(IllegalArgumentException exception) {
+    private static final OutputView instance = new OutputView();
+
+    public static OutputView getInstance() {
+        return instance;
+    }
+
+    private OutputView() {
+    }
+
+    public void printExceptionMessage(IllegalArgumentException exception) {
         System.out.println(exception.getMessage());
     }
 
-    public static void printMainScreen() {
+    public void printMainScreen() {
         System.out.println(Message.MAIN_SCREEN.message);
         System.out.println();
     }
 
-    public static void printTables(final List<Table> tables) {
+    public void printTables(final List<Table> tables) {
         System.out.println("## 테이블 목록");
         final int size = tables.size();
         printLine(TOP_LINE, size);
@@ -32,7 +41,7 @@ public class OutputView {
         System.out.println();
     }
 
-    private static void printMarkedLine(List<Table> tables) {
+    private void printMarkedLine(List<Table> tables) {
         for (int index = 0; index < tables.size(); index++) {
             if (tables.get(index).hasOrder()) {
                 System.out.print(MARKED_LINE);
@@ -43,20 +52,20 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printMenus(final List<Menu> menus) {
+    public void printMenus(final List<Menu> menus) {
         for (final Menu menu : menus) {
             System.out.println(menu);
         }
     }
 
-    private static void printLine(final String line, final int count) {
+    private void printLine(final String line, final int count) {
         for (int index = 0; index < count; index++) {
             System.out.print(line);
         }
         System.out.println();
     }
 
-    private static void printTableNumbers(final List<Table> tables) {
+    private void printTableNumbers(final List<Table> tables) {
         for (final Table table : tables) {
             System.out.printf(TABLE_FORMAT, table);
         }
@@ -64,7 +73,7 @@ public class OutputView {
     }
 
 
-    public static void printOrderHistory(Map<Menu, Integer> orderHistory) {
+    public void printOrderHistory(Map<Menu, Integer> orderHistory) {
         System.out.println(Message.ORDER_HISTORY.message);
         for (Menu menu : orderHistory.keySet()) {
             System.out.printf(Message.ORDER_HISTORY_FORMAT.message,
@@ -73,16 +82,16 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printStartPayment(int number) {
+    public void printStartPayment(int number) {
         System.out.printf(Message.START_PAYMENT.message, number);
     }
 
-    public static void printTotalPrice(BigDecimal totalPrice) {
+    public void printTotalPrice(BigDecimal totalPrice) {
         System.out.printf(Message.TOTAL_PRICE.message, formatTotalPrice(totalPrice));
         System.out.println();
     }
 
-    private static String formatTotalPrice(BigDecimal totalPrice) {
+    private String formatTotalPrice(BigDecimal totalPrice) {
         return new DecimalFormat(DECIMAL_FORMAT).format(totalPrice);
     }
 
@@ -106,6 +115,4 @@ public class OutputView {
         }
     }
 
-    private OutputView() {
-    }
 }
